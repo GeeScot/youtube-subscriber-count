@@ -7,12 +7,19 @@ const apiSlice = createApi({
     getChannelId: builder.query<string, string>({
       query: (username) => `/id/${username}`
     }),
-    getStatistics: builder.query<string, string>({
-      query: (channelId) => `/statistics/${channelId}`
+    getSubscriberCount: builder.query<string, number>({
+      query: (channelId) => `/statistics/${channelId}`,
+      transformResponse: (response) => {
+        if (!response) {
+          return 0;
+        }
+
+        return parseInt(response);
+      }
     })
   })
 });
 
-export const { useGetChannelIdQuery, useGetStatisticsQuery } = apiSlice;
+export const { useGetChannelIdQuery, useGetSubscriberCountQuery } = apiSlice;
 
 export default apiSlice;

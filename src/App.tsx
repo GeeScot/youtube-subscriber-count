@@ -1,12 +1,12 @@
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useGetChannelIdQuery, useGetStatisticsQuery } from "./features/apiSlice";
+import { useGetChannelIdQuery, useGetSubscriberCountQuery } from "./features/apiSlice";
 
 const App = () => {
   const { username, goal } = useParams<{ username: string, goal: string }>();
   const { data: channelId } = useGetChannelIdQuery(username ?? skipToken);
-  const { data: subscriberCount } = useGetStatisticsQuery(channelId ?? skipToken, {
+  const { data: subscriberCount } = useGetSubscriberCountQuery(channelId ?? skipToken, {
     pollingInterval: 60000
   });
 
