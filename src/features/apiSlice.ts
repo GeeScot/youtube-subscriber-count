@@ -9,7 +9,7 @@ const apiSlice = createApi({
     }),
     getSubscriberCount: builder.query<number, string>({
       query: (channelId) => `/statistics/${channelId}`,
-      transformResponse: (response) => {
+      transformResponse: (response: string) => {
         if (!response) {
           return 0;
         }
