@@ -1,58 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { skipToken } from "@reduxjs/toolkit/dist/query";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import { useGetChannelIdQuery, useGetStatisticsQuery } from "./features/apiSlice";
 
-function App() {
+const App = () => {
+  const { username, goal } = useParams<{ username: string, goal: string }>();
+  const { data: channelId } = useGetChannelIdQuery(username ?? skipToken);
+  const { data: subscriberCount } = useGetStatisticsQuery(channelId ?? skipToken, {
+    pollingInterval: 60000
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Container>
+      <div>2023 !Youtube Sub Goal</div>
+      <Goal>{ subscriberCount } / { goal }</Goal>
+    </Container>
   );
 }
 
 export default App;
+
+const Container = styled.div`
+  display: inline-block;
+  text-align: center;
+  gap: 10px;
+
+  padding: 10px 15px;
+
+  border-radius: 50px;
+  border: 2px solid red;
+  background-color: red;
+
+  color: #ffffff;
+`;
+
+const Goal = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+`;

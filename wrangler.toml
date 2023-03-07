@@ -1,0 +1,10 @@
+name = "youtube-api"
+
+[vars]
+YOUTUBE_KEY = "example_dev_token"
+
+[env.production]
+name = "youtube-api"
+
+[env.production.vars]
+YOUTUBE_KEY = "example_prod_token"
