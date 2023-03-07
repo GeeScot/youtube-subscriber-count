@@ -7,7 +7,7 @@ const App = () => {
   const { username, goal } = useParams<{ username: string, goal: string }>();
   const { data: channelId } = useGetChannelIdQuery(username ?? skipToken);
   const { data: subscriberCount } = useGetSubscriberCountQuery(channelId ?? skipToken, {
-    pollingInterval: 60000
+    pollingInterval: 120000
   });
 
   return (
