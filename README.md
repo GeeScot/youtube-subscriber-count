@@ -1,3 +1,29 @@
+## Usage
+
+Customise layout and labels
+
+```css
+.container {
+  font-size: 20px;
+  border-radius: 6px;
+  background-color: #fec8d8;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  color: #0f0f0f;
+}
+
+.header::after {
+  content: "2023 !Youtube Sub Goal";
+}
+
+.goal::after {
+  content: "1000";
+}
+```
+
+## OBS Studio
+
+Recommended width and height for the browser source, 420px x 120px
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.

@@ -1,22 +1,28 @@
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import { skipToken } from "@reduxjs/toolkit/dist/query";
-import AnimatedNumber from "react-animated-numbers";
-import { useGetChannelIdQuery, useGetSubscriberCountQuery } from "./features/apiSlice";
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
+import AnimatedNumber from 'react-animated-numbers';
+import {
+  useGetChannelIdQuery,
+  useGetSubscriberCountQuery,
+} from './features/apiSlice';
 
 const App = () => {
-  const { username, goal } = useParams<{ username: string, goal: string }>();
+  const { username } = useParams<{ username: string }>();
   const { data: channelId } = useGetChannelIdQuery(username ?? skipToken);
-  const { subscriberCount } = useGetSubscriberCountQuery(channelId ?? skipToken, {
-    pollingInterval: 300000,
-    selectFromResult: ({ data }) => {
-      return { subscriberCount: data ?? 0 };
+  const { subscriberCount } = useGetSubscriberCountQuery(
+    channelId ?? skipToken,
+    {
+      pollingInterval: 300000,
+      selectFromResult: ({ data }) => {
+        return { subscriberCount: data ?? 0 };
+      },
     }
-  });
+  );
 
   return (
-    <Container>
-      <Header>2023 !Youtube Sub Goal</Header>
+    <Container className="container">
+      <Header className="header"></Header>
       <Goal>
         <AnimatedNumber
           includeComma
@@ -30,11 +36,12 @@ const App = () => {
             { mass: 1, tension: 210, friction: 180 },
           ]}
         />
-        <div>&nbsp;/&nbsp;{ goal }</div>
+        <div>/</div>
+        <div className="goal"></div>
       </Goal>
     </Container>
   );
-}
+};
 
 export default App;
 
@@ -45,24 +52,26 @@ const Container = styled.div`
 
   padding: 10px 15px;
 
-  border-radius: 50px;
-  border: 2px solid red;
-  background-color: red;
+  border-radius: 6px;
+  background-color: #fec8d8;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-  color: #ffffff;
+  color: #0f0f0f;
 `;
 
 const Header = styled.div`
+  font-size: 30px;
   margin-bottom: 5px;
 `;
 
 const Goal = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 2px;
 
   align-items: center;
   justify-content: center;
 
-  font-size: 20px;
+  font-size: 40px;
   font-weight: bold;
 `;
