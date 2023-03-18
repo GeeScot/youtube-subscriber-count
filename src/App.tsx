@@ -13,7 +13,7 @@ const App = () => {
   const { subscriberCount } = useGetSubscriberCountQuery(
     channelId ?? skipToken,
     {
-      pollingInterval: 300000,
+      pollingInterval: 60000,
       selectFromResult: ({ data }) => {
         return { subscriberCount: data ?? 0 };
       },
