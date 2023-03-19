@@ -1,3 +1,11 @@
+## Build Environment Variables
+
+These environment variables are required for the Cloudflare Pages Functions to run and during build time when deploying the project to Cloudflare
+
+```console
+YOUTUBE_KEY=your-youtube-api-key
+```
+
 ## Usage
 
 Customise layout and labels
